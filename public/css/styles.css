@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* MENU */
+.logo__navbar {
+  width: 120px !important;
+}
+
+/* LOGIN */
+.card__formulario {
+  border: 2px solid #ededed;
+  border-radius: 10px;
+  background-color: #ededed;
+}
+
+.logo__login {
+  background-color: #212529;
+  border-radius: 10px;
+}
+
+.subtitulo {
+  color: #818181;
+}
+
+.zumbido {
+  animation: zumbido 0.1s 3;
+}
+
+@keyframes zumbido {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

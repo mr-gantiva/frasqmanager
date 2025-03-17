@@ -9,7 +9,7 @@
 
 <a href="<?= base_url('productos/crear') ?>" class="btn btn-primary mb-3">Crear Producto</a>
 
-<table class="table table-bordered">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>ID</th>
@@ -35,8 +35,10 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <a href="<?= base_url('productos/editar/' . $producto['id']) ?>">Editar</a>
-                    <a href="<?= base_url('productos/eliminar/' . $producto['id']) ?>" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <a class="btn btn-info" href="<?= base_url('productos/editar/' . $producto['id']) ?>">Editar</a>
+                        <a class="btn btn-danger" href="<?= base_url('productos/eliminar/' . $producto['id']) ?>" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                    </div>
                 </td>
             </tr>
         <?php endforeach; ?>

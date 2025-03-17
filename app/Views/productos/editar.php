@@ -1,49 +1,49 @@
-<!DOCTYPE html>
-<html lang="es">
+<?= $this->extend('templates/layout') ?>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Producto</title>
-</head>
+<?= $this->section('content') ?>
+<h1>Editar Producto</h1>
 
-<body>
-    <h1>Editar Producto</h1>
+<?php if (session('errors')): ?>
+    <div style="color: red;">
+        <?php foreach (session('errors') as $error): ?>
+            <?= $error ?><br>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 
-    <?php if (session('errors')): ?>
-        <div style="color: red;">
-            <?php foreach (session('errors') as $error): ?>
-                <?= $error ?><br>
-            <?php endforeach; ?>
-        </div>
+<form action="<?= base_url('productos/actualizar/' . $producto['id']) ?>" method="post">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" class="form-control" name="nombre" id="nombre" value="<?= $producto['nombre'] ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <textarea name="descripcion" class="form-control" id="descripcion" required><?= $producto['descripcion'] ?></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="precio" class="form-label">Precio:</label>
+        <input type="number" class="form-control" step="0.01" name="precio" id="precio" value="<?= $producto['precio'] ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="stock" class="form-label">Stock:</label>
+        <input type="number" class="form-control" name="stock" id="stock" value="<?= $producto['stock'] ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="imagen" class="form-label">URL de la Imagen:</label>
+        <input type="url" class="form-control" name="imagen" id="imagen" value="<?= $producto['imagen'] ?>" placeholder="https://ejemplo.com/imagen.jpg">
+    </div>
+
+    <?php if ($producto['imagen']): ?>
+        <img src="<?= $producto['imagen'] ?>" alt="Imagen del producto" width="100">
     <?php endif; ?>
 
-    <form action="<?= base_url('productos/actualizar/' . $producto['id']) ?>" method="post">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" value="<?= $producto['nombre'] ?>" required>
-        <br>
+    <button type="submit" class="btn btn-success">Actualizar</button>
 
-        <label for="descripcion">Descripción:</label>
-        <textarea name="descripcion" id="descripcion" required><?= $producto['descripcion'] ?></textarea>
-        <br>
 
-        <label for="precio">Precio:</label>
-        <input type="number" step="0.01" name="precio" id="precio" value="<?= $producto['precio'] ?>" required>
-        <br>
-
-        <label for="stock">Stock:</label>
-        <input type="number" name="stock" id="stock" value="<?= $producto['stock'] ?>" required>
-        <br>
-
-        <label for="imagen">URL de la Imagen:</label>
-        <input type="url" name="imagen" id="imagen" value="<?= $producto['imagen'] ?>" placeholder="https://ejemplo.com/imagen.jpg">
-        <br>
-
-        <?php if ($producto['imagen']): ?>
-            <img src="<?= $producto['imagen'] ?>" alt="Imagen del producto" width="100">
-        <?php endif; ?>
-
-        <button type="submit">Actualizar</button>
-    </form>
-</body>
-
-</html>
+    <a href="<?= base_url('productos') ?>" class="btn btn-info" tabindex="-1" role="button" aria-disabled="false">Volver</a>
+</form>
+<?= $this->endSection() ?>

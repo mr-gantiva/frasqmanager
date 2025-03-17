@@ -14,19 +14,38 @@ class ProductoController extends BaseController
     public function __construct()
     {
         $this->productoModel = new ProductoModel();
+
+        // Iniciar la sesión
+        $session = session();
+
+        // Verificar si el usuario esta logueado
+        if (!$session->get('logged_in')) {
+            header('Location: ' . base_url('/login'));
+            exit(); //Detiene la ejecución para evitar que el resto del código se ejecute
+        }
     }
 
     // Listar todos los productos
     public function index()
     {
-        $data['productos'] = $this->productoModel->findAll();
+        $data = [
+            'title' => 'Lista de Productos',
+            'productos' => $this->productoModel->findAll(),
+            'css' => 'productos.css'
+        ];
         return view('productos/index', $data);
+        // $data['productos'] = $this->productoModel->findAll();
+        // return view('productos/index', $data);
     }
 
     // Mostrar el formulario para crear un nuevo producto
     public function crear()
     {
-        return view('productos/crear');
+        $data = [
+            'title' => 'Crear Productos',
+        ];
+        return view('productos/crear', $data);
+        // return view('productos/crear',);
     }
 
     // Guardar un nuevo producto
@@ -57,8 +76,13 @@ class ProductoController extends BaseController
     // Mostrar el formulario para editar un producto
     public function editar($id)
     {
-        $data['producto'] = $this->productoModel->find($id);
+        $data = [
+            'title' => 'Editar Productos',
+            'producto' => $this->productoModel->find($id),
+        ];
         return view('productos/editar', $data);
+        // $data['producto'] = $this->productoModel->find($id);
+        // return view('productos/editar', $data);
     }
 
     // Actualizar un producto
